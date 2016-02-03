@@ -1,0 +1,54 @@
+<html ng-app="todo">
+<head>
+    <meta charset="UTF-8">
+    <title>NG-TODO</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
+</head>
+<body ng-controller="TodoController">
+    
+    <input type="text" ng-model="query" />
+    <button ng-click="sortOrder = 'dueDate'">Sort A</button>
+    <button ng-click="sortOrder = '-dueDate'">Sort D</button>
+    
+    <ul>
+        <li ng-repeat="chore in todos | filter: query | orderBy: sortOrder">
+            <h3>{{chore.responsibleParty}} - {{chore.task}} <span ng-click="removeItem($index)">X</span></h3>
+            <p>{{chore.dueDate | date}} : {{chore.estTime}}</p>
+        </li>
+    </ul>
+    
+    <!--START NEW TASK FORM-->
+    <!--
+        /** TASK MODEL
+     * {
+     *   task: String,
+     *   dueDate: Date,
+     *   responsibleParty: String,
+     *   estTime: Number
+     * }
+     */
+    -->
+    <div class="form">
+        <div class="form-group"><label for="task">Chore:</label>
+            <input class="form-control" type="text" ng-model="newTask.task" placeholder="Chore"/>
+        </div>
+        <div class="form-group"><label for="dueDate">Due Date:</label>
+            <input class="form-control" type="date" ng-model="newTask.dueDate" placeholder="Finish By" />
+        </div>
+        <div class="form-group"><label for="responsibleParty">Assign To:</label>
+            <input class="form-control" type="text" ng-model="newTask.responsibleParty" placeholder="Name of person" />
+        </div>
+        <div class="form-group"><label for="estTime">Est Time:</label>
+            <input class="form-control" type="text" ng-model="newTask.estTime" placeholder="15 min"/>
+        </div>
+        <button ng-click="addItem()">Add Item</button>    
+    </div>
+    <!--END NEW TASK FORM-->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/components/todo/todo-controller.js"></script>
+    
+</body>
+</html>
