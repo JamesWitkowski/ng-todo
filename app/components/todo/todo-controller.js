@@ -1,5 +1,5 @@
 app.controller('TodoController', function($scope){
-    $scope.test = "I like bananas"
+   
     
     /** TASK MODEL
      * {
